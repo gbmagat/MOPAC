@@ -2408,3 +2408,146 @@ footer {
 
 
 }
+
+/* Responsive repairs: keep content in flow as the viewport changes. */
+#links { margin: 1em auto; width: fit-content; max-width: 100%; justify-content: center; }
+footer, #footerH, #footerA, #footerV { display: flow-root; height: auto; min-height: 210px; padding-bottom: 1.5em; }
+#HomeImageA { width: 100%; object-fit: cover; }
+nav { z-index: 30; }
+#MOPAC-LOGO { min-width: 0; }
+#MOPAC-LOGO > a { flex-shrink: 0; }
+nav > ul { flex-shrink: 0; }
+
+/* Reuse the existing hamburger on tablets where the full navigation cannot fit. */
+@media (max-width: 1100px) {
+    #MOPAC-LOGO { height: auto; min-height: 64px; padding: 10px; }
+    #MOPAC-LOGO img { width: 45px; margin: 0 16px 0 5px; }
+    #MOPAC-LOGO h1 { font-size: clamp(16px, 2.5vw, 18px); }
+    #navv, .search-container { display: none; }
+    #menuContainer { display: flex; align-items: center; margin-right: 1em; }
+    #menuToggle { display: flex; flex-direction: column; position: relative; cursor: pointer; z-index: 30; }
+    #menuToggle input { display: block; position: absolute; width: 40px; height: 40px; top: -8px; left: -10px; opacity: 0; z-index: 2; cursor: pointer; }
+    #menuToggle span { display: block; width: 20px; height: 4px; margin: 2px 0; background: #fff; border-radius: 3px; transform-origin: 4px 0; transition: transform .3s; }
+    #menuToggle input:checked ~ span { transform: rotate(45deg) translate(-2px, -1px); }
+    #menuToggle input:checked ~ span:nth-last-child(3) { opacity: 0; }
+    #menuToggle input:checked ~ span:nth-last-child(2) { transform: rotate(-45deg); }
+    #menu { display: none; position: absolute; top: 100%; right: -26px; width: min(220px, 90vw); margin: 20px 0 0; padding: 10px; background: #66312F; transform: none; max-height: calc(100vh - 84px); overflow-y: auto; }
+    #menuToggle input:checked ~ #menu { display: block; transform: none; }
+    #menu a { display: block; padding: 10px; }
+}
+
+/* Home: the same staggered cards, with section heights driven by their content. */
+body:has(#Highlight) { display: grid; grid-template-columns: minmax(0, 1fr); }
+body:has(#Highlight) > nav { grid-row: 1; }
+body:has(#Highlight) > .video-container {
+    --hero-height: clamp(280px, 56.25vw, 1000px);
+    --hero-frame-height: max(calc(var(--hero-height) + 140px), 67.5vw);
+    grid-row: 2;
+    height: var(--hero-height);
+    overflow: hidden;
+}
+/* Keep the original zoomed framing, including the crop above the video. */
+.video-container iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--hero-frame-height) * 16 / 9);
+    height: var(--hero-frame-height);
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+body:has(#Highlight) > #p1 { grid-row: 3; margin-top: -150px; height: auto; min-height: 150px; padding: 48px clamp(20px, 4vw, 64px) 24px; font-size: clamp(16px, 2.2vw, 32px); }
+body:has(#Highlight) > .divider-container:has(#divider1) { grid-row: 4; }
+body:has(#Highlight) > .BG { grid-row: 5; grid-column: 1; }
+#BGYellow { position: absolute; inset: 0; height: 100%; }
+#Highlight { grid-row: 5; grid-column: 1; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 6vw, 120px); align-items: start; width: min(100% - 64px, 1632px); margin: 48px auto; }
+#Highl1, #Highl2, #Highl3 { position: relative; float: none; width: 100%; height: auto; margin: 0; }
+#Highl1 { margin-top: 80px; }
+#Highl2 { margin-top: 240px; }
+.Himg { display: block; width: 100%; }
+body:has(#Highlight) > .divider-container:has(#divider2) { grid-row: 6; }
+#divider2 { position: relative; top: auto; margin: 0; }
+.divider-text2 { top: 50%; white-space: nowrap; }
+#shop { grid-row: 7; grid-column: 1; position: relative; overflow: hidden; background: #302b29 url('image/bg black.png') center / cover; }
+#shop > .BG, #BGBlack { display: none; }
+#OverlayImagehome { top: 0; bottom: auto; left: -10%; width: 70%; }
+.video-container2 { grid-row: 7; grid-column: 1; margin: clamp(24px, 6vw, 120px) clamp(16px, 8vw, 176px); padding: clamp(16px, 3vw, 32px); gap: 24px; }
+.video-container2 .flex-container { flex: 1; min-width: 0; }
+.video-container2 video { margin: 0; width: 100%; }
+#shopp { flex: 1; min-width: 0; margin: 0; width: auto; align-self: center; font-size: clamp(20px, 1.9vw, 27px); }
+#footerH { grid-row: 8; margin-top: 0; }
+
+/* About and exhibitions: scale images and let backgrounds follow text height. */
+#BGYellowA, #BGRedE, #BGYellowE, #BGBlackE { display: none; }
+#aboutinfo { margin: 0; padding: clamp(24px, 6vw, 128px); gap: clamp(24px, 3vw, 56px); background: #ffefc7 url('image/bg yellow.png') center / cover; }
+#aboutimage { width: 40%; height: auto; margin: 0; flex-shrink: 0; }
+.text-containerA, .text-containerEa, .text-containerEa2 { min-width: 0; }
+.aboutP { margin: 0 0 1em; }
+#exC1, #exC2 { margin: 0; padding: clamp(24px, 4vw, 80px); gap: clamp(24px, 4vw, 64px); align-items: flex-start; }
+#exC1 { background: #803D3B url('image/bg red.png') center / cover; }
+#exC2 { background: #ffefc7 url('image/bg yellow.png') center / cover; }
+#exC1:last-child { background-image: url('image/bg black.png'); }
+#ex1image, #ex2image { flex-shrink: 0; width: 30%; max-width: 410px; height: auto; margin: 0; }
+.text-containerEa2 { margin-top: 0; }
+.aboutE1, .aboutE2, #aboutE1a { margin: 0 0 1em; width: auto; }
+#exb1link, #exb2link { margin: 1em 0 0; max-width: 100%; text-align: center; }
+.footerE { margin-top: 0; }
+
+/* Visit: keep the information and map in separate columns, then stack them. */
+#visit-container { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: center; padding: clamp(24px, 6vw, 128px); overflow: hidden; background: #302b29 url('image/bg black.png') center / cover; }
+#BGBlackVisit { display: none; }
+#OverlayImagevisit { top: 0; left: 0; width: 70%; z-index: 0; }
+#details { position: relative; top: auto; margin: 0; width: 100%; z-index: 1; }
+.deth3, .detP { width: 100%; margin-left: 0; }
+.detP { margin-bottom: 32px; }
+#det3 .detP { margin-bottom: 0; }
+#map { width: 100%; margin: 0; text-align: center; }
+#map iframe { width: 100%; max-width: 580px; }
+#maplink { position: relative; margin: 24px auto 0; max-width: 100%; }
+#footerV { top: 0; margin: 0; }
+
+/* Artwork pages: remove fixed figure sizes and the negative stacking offsets. */
+body:has(#mbinfo) { background: #ffefc7 url('image/bg yellow.png') center / cover; }
+#mbinfo { background: #fff; padding: clamp(24px, 4vw, 70px); border-bottom: 5px solid #5e2d2b; }
+#mb1 { top: auto; margin: 0; }
+#mbdes { margin: 2em 0 0; max-width: 1100px; }
+#BGYellowMB, #BGYellow13A, #BGYellowIF { display: none; }
+#mb2 { margin: 2em clamp(24px, 4vw, 70px) 0; }
+#mabiniArt-container, #mabiniArt-container2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 6vw, 120px); align-items: start; width: min(100% - 48px, 1400px); margin: 3em auto; }
+#MBA1, #MBA2, #MBA3, #MBA4, #IF1, #IF2, #IF3, #IF4 { width: 100%; height: auto; margin: 0; min-width: 0; }
+#mabiniArt-container img, #mabiniArt-container2 img, #mabiniArt-container3 img { display: block; width: 100%; height: auto; margin: 0 auto; }
+#mabiniArt-container3 { width: min(100% - 48px, 1000px); margin: 3em auto; }
+body:has(#mbinfo) > footer { margin-top: 4em; }
+
+@media (max-width: 1365px) {
+    #HomeImageA { height: 500px; margin-bottom: -160px; }
+    .aboutP, .aboutE1, .aboutE2, #aboutE1a { font-size: 20px; line-height: 1.6; letter-spacing: 2px; }
+    #mbdes { font-size: 22px; }
+}
+@media (max-width: 1023px) {
+    #Highlight { grid-template-columns: minmax(0, 1fr); gap: 48px; width: calc(100% - 64px); }
+    #Highl1, #Highl2, #Highl3 { width: 60%; margin: 0; }
+    #Highl2 { justify-self: end; }
+    #aboutinfo { flex-direction: column; }
+    #aboutimage { width: 60%; margin: 0 auto; }
+    #exC1, #exC2 { flex-direction: column; }
+    #ex1image, #ex2imageMobile { width: 60%; max-width: 410px; height: auto; margin: 0 auto 24px; }
+    #ex2image { display: none; }
+    #ex2imageMobile { display: block; }
+    .text-containerEa, .text-containerEa2 { width: 100%; }
+    .video-container2 { flex-direction: column; }
+    #visit-container { grid-template-columns: minmax(0, 1fr); }
+    #details { max-width: 600px; margin: 0 auto; }
+}
+@media (max-width: 600px) {
+    #Highlight { width: calc(100% - 48px); }
+    #Highl1, #Highl2, #Highl3 { width: 100%; }
+    #HomeImageA { margin-bottom: -240px; }
+    #aboutimage, #ex1image, #ex2imageMobile { width: 100%; }
+    #h1A { margin-right: 0; }
+    .aboutP, .aboutE1, .aboutE2, #aboutE1a { font-size: 19px; letter-spacing: 1px; overflow-wrap: break-word; }
+    #mbdes { font-size: 17px; }
+    #mabiniArt-container, #mabiniArt-container2 { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+    #map iframe { height: 300px; }
+    .divider-text { white-space: nowrap; }
+}
