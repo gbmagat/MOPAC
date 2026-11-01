@@ -2440,7 +2440,7 @@ nav > ul { flex-shrink: 0; }
 body:has(#Highlight) { display: grid; grid-template-columns: minmax(0, 1fr); }
 body:has(#Highlight) > nav { grid-row: 1; }
 body:has(#Highlight) > .video-container {
-    --hero-height: clamp(280px, 56.25vw, 1000px);
+    --hero-height: min(clamp(280px, 56.25vw, 1000px), calc(100svh - 150px));
     --hero-frame-height: max(calc(var(--hero-height) + 140px), 67.5vw);
     grid-row: 2;
     height: var(--hero-height);
